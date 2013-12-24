@@ -1,10 +1,17 @@
 Blog::Application.routes.draw do
+  get "sp/index"
+
+  get "sp/help"
+
+  get "sp/about"
+
+  get "sp/contactus"
+
   resources :posts do
     resources :comments
   end
   
 
-  get "home/index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -55,7 +62,7 @@ Blog::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'home#index'
+  root :to => 'sp#index'
 
   # See how all your routes lay out with "rake routes"
 
