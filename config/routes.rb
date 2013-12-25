@@ -1,12 +1,9 @@
 Blog::Application.routes.draw do
-  get "sp/index"
 
-  get "sp/help"
-
-  get "sp/about"
-
-  get "sp/contactus"
-
+  match '/', to: 'sp#index'
+  match '/help', to: "sp#help"
+  match '/contactus', to: "sp#contactus"
+  match '/about', to: "sp#about"
   resources :posts do
     resources :comments
   end
