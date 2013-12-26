@@ -1,5 +1,7 @@
 Blog::Application.routes.draw do
 
+  resources :users
+
   match '/', to: 'sp#index'
   match '/help', to: "sp#help"
   match '/contactus', to: "sp#contactus"
