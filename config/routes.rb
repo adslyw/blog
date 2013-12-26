@@ -1,5 +1,7 @@
 Blog::Application.routes.draw do
 
+  resources :microposts
+
   resources :users
 
   match '/', to: 'sp#index'
