@@ -8,6 +8,7 @@ Blog::Application.routes.draw do
   match '/help', to: "sp#help"
   match '/contactus', to: "sp#contactus"
   match '/about', to: "sp#about"
+  match '/signup', to: "users#new"
   resources :posts do
     resources :comments
   end
