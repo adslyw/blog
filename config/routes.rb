@@ -1,14 +1,17 @@
 Blog::Application.routes.draw do
 
   resources :microposts
-
+  resources :sessions, only: [:new, :create, :destroy]
   resources :users
 
   match '/', to: 'sp#index'
+  match '/signup', to: "users#new", via: 'get'
+  match '/signin', to: 'sessions#new', via: 'get'
+  match '/signout', to: 'sessions#destroy', via: 'delete'
   match '/help', to: "sp#help"
   match '/contactus', to: "sp#contactus"
   match '/about', to: "sp#about"
-  match '/signup', to: "users#new"
+
   resources :posts do
     resources :comments
   end
