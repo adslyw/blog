@@ -1,6 +1,6 @@
 <%= provide(:title, @user.name) %>
 <p id="notice"><%= notice %></p>
-
+<%= gravatar_for @user, size: 200 %>
 <p>
   <b>Name:</b>
   <%= @user.name %>

@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
+  before_filter  :signed_in_user, only: [:index, :edit, :update, :destroy]
+  before_filter  :correct_user,   only: [:edit, :update]
+  before_filter  :admin_user, only:[:destroy]
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+     @users = User.paginate(page: params[:page],per_page: 10)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -60,7 +63,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if @user.update_attributes(user_params)
         flash[:success] = 'User was successfully updated.'
         format.html { redirect_to @user }
         format.json { head :no_content }
@@ -76,10 +79,38 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-
+    flash[:success] = "User destroyed."
     respond_to do |format|
-      format.html { redirect_to users_url }
+      format.html { redirect_to users_url}
       format.json { head :no_content }
     end
   end
+
+  private
+    def signed_in_user
+      unless signed_in?
+        store_location
+        flash[:danger] = "Please sign in."
+        redirect_to signin_path
+      end        
+    end
+
+    def user_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
+
+    def correct_user
+      @user = User.find(params[:id])
+      unless current_user?(@user)
+        flash[:danger] = "You don't have the permition to do that."
+        redirect_to root_path
+      end      
+    end
+
+    def admin_user
+      unless  current_user.admin?
+        flash[:danger] = "Permission denied."
+        redirect_to users_path 
+      end
+    end
 end
