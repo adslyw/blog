@@ -1,16 +1,23 @@
 <%= provide(:title, @user.name) %>
-<p id="notice"><%= notice %></p>
-<%= gravatar_for @user, size: 200 %>
-<p>
-  <b>Name:</b>
-  <%= @user.name %>
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+    <%= gravatar_for @user, size: 200 %>
+    <p>
+      <b><h1><%= @user.name %></h1></b>   
+    </p>
+    <p>
+     <span class="glyphicon glyphicon-envelope"></span>
+       <%= @user.email %>
+    </p>
+    </div>
+    <div class="col-md-6"> 
+      <%= render 'shared/microposts' %>
+    </div>
+    <div class="col-md-3"> 
+      
+    </div>
+  </div>
+</div>
 
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
 
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>

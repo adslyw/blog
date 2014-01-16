@@ -2,8 +2,10 @@ Blog::Application.routes.draw do
 
   resources :microposts
   resources :sessions, only: [:new, :create, :destroy]
-  resources :users
-
+  resources :users do
+    resources :microposts
+  end
+  
   match '/', to: 'sp#index'
   match '/signup', to: "users#new", via: 'get'
   match '/signin', to: 'sessions#new', via: 'get'
