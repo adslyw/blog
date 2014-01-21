@@ -1,49 +1,24 @@
 require 'test_helper'
 
 class PostsControllerTest < ActionController::TestCase
-  setup do
-    @post = posts(:one)
-  end
-
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:posts)
-  end
-
-  test "should get new" do
-    get :new
+  test "should get create" do
+    get :create
     assert_response :success
   end
 
-  test "should create post" do
-    assert_difference('Post.count') do
-      post :create, post: { content: @post.content, name: @post.name, title: @post.title }
-    end
-
-    assert_redirected_to post_path(assigns(:post))
-  end
-
-  test "should show post" do
-    get :show, id: @post
+  test "should get show" do
+    get :show
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, id: @post
+  test "should get update" do
+    get :update
     assert_response :success
   end
 
-  test "should update post" do
-    put :update, id: @post, post: { content: @post.content, name: @post.name, title: @post.title }
-    assert_redirected_to post_path(assigns(:post))
+  test "should get destroy" do
+    get :destroy
+    assert_response :success
   end
 
-  test "should destroy post" do
-    assert_difference('Post.count', -1) do
-      delete :destroy, id: @post
-    end
-
-    assert_redirected_to posts_path
-  end
 end

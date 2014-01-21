@@ -2,19 +2,12 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-    <%= gravatar_for @user, size: 200 %>
-    <p>
-      <b><h1><%= @user.name %></h1></b>   
-    </p>
-    <p>
-     <span class="glyphicon glyphicon-envelope"></span>
-       <%= @user.email %>
-    </p>
+      <%= render 'shared/user-info' %>
     </div>
-    <div class="col-md-6"> 
+    <div class="col-md-8"> 
       <%= render 'shared/microposts' %>
     </div>
-    <div class="col-md-3"> 
+    <div class="col-md-1"> 
       
     </div>
   </div>

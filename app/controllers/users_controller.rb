@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter  :signed_in_user, only: [:index, :edit, :update, :destroy]
+  before_filter  :signed_in_user, only: [:index, :edit, :show, :update, :destroy]
   before_filter  :correct_user,   only: [:edit, :update]
   before_filter  :admin_user, only:[:destroy]
   # GET /users
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts.paginate(page: params[:page])
+    @microposts = @user.microposts.paginate(page: params[:page],per_page: 7)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -63,7 +63,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     respond_to do |format|
-      if @user.update_attributes(user_params)
+      if @user.update_attributes(params[:user])
         flash[:success] = 'User was successfully updated.'
         format.html { redirect_to @user }
         format.json { head :no_content }

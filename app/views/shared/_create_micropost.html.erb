@@ -4,17 +4,23 @@
       <h2><%= pluralize(@micropost.errors.count, "error") %> prohibited this micropost from being saved:</h2>
 
       <ul>
+      <div class="alert alert-danger">
       <% @micropost.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
+      </div>
       </ul>
     </div>
   <% end %>
-
-  <div>
-    <%= f.text_area :content %>
-  </div>
-  <div>
-    <%= f.submit %>
+  <div class="form-group">
+      <div class="col-sm-block">
+        <%= f.text_area :content,class: "form-control", rows: "3", placeholder: "Write your micropost here..."%>
+      </div>      
+    </div>
+  </p>  
+  <div class="row">
+    <div class="col-sm-2">
+      <%= f.submit "Post", class: "btn btn-primary btn-slg btn-block"%>
+    </div>
   </div>
 <% end %>

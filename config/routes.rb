@@ -2,8 +2,9 @@ Blog::Application.routes.draw do
 
   resources :microposts
   resources :sessions, only: [:new, :create, :destroy]
+  resources :posts
   resources :users do
-    resources :microposts
+    resources :microposts,:posts
   end
   
   match '/', to: 'sp#index'

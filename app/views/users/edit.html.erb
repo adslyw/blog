@@ -1,7 +1,23 @@
-<h1>Editing user</h1>
-<%= gravatar_for @user, size: 150,class: "img-rounded" %>
-<a href="http://gravatar.com/emails">Change</a>
-<%= render 'form' %>
+<div class="container">
+  <div class="row">
+      <div class="col-md-2">
+      		<p>        	
+  				<%= gravatar_for @user, size: 166,class: "img-rounded" %>	
+  			</p>       
+			<p>
+				<a href="http://gravatar.com/emails" class="btn btn-warning btn-block" role="button">Change</a>
+			</p>
+			<p>
+				<%= link_to 'Show', @user %> |
+				<%= link_to 'Back', users_path %>
+			</p>			
+      </div>
+      <div class="col-md-8">
+        <%= render 'form' %>
+      </div>
+  </div>
+</div>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+
+
+

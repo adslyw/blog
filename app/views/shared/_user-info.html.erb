@@ -1,0 +1,20 @@
+<%= gravatar_for @user, size: 200 %>
+<p>
+  <b><h1><%= @user.name %></h1></b>   
+</p>
+<p>
+  <span class="glyphicon glyphicon-time"></span>
+  <%= @user.created_at.to_formatted_s(:db) %>
+</p>
+<p>
+ <span class="glyphicon glyphicon-envelope"></span>
+   <%= @user.email %>
+</p>
+<p>
+ <span class="glyphicon glyphicon-send"></span>
+ <%= pluralize(@user.posts.count, "post") %>
+</p>
+<p>
+ <span class="glyphicon glyphicon-bullhorn"></span>
+ <%= pluralize(@user.microposts.count, "micropost") %>
+</p>
