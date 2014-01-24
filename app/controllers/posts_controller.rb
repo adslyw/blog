@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
-	before_filter :signed_in_user, only: [:create, :update, :destroy] 
+	before_filter :signed_in_user, only: [:new,:create, :update, :destroy] 
   def new
   	@post = Post.new
+    @user = current_user
   end
   def create
   	@user = current_user
@@ -18,7 +19,8 @@ class PostsController < ApplicationController
   end
 
   def index
-  	@posts = Post.paginate(page: params[:page],per_page: 5)
+    @user = User.find(params[:user_id])
+    @posts = Post.where(user_id: params[:user_id]).paginate(page: params[:page],per_page: 5)
   	respond_to do |format|
   		format.html
   		format.json { render json: @posts}
@@ -32,7 +34,7 @@ class PostsController < ApplicationController
     @post.destroy
     flash[:success] = "Destroyed successfully!"
     respond_to do |format|
-      format.html { redirect_to posts_url }
+      format.html { redirect_to user_posts_url }
       format.json { head :no_content }
     end
   end

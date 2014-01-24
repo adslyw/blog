@@ -4,11 +4,28 @@
     <div class="col-md-3">
       <%= render 'shared/user-info' %>
     </div>
-    <div class="col-md-8"> 
-      <%= render 'shared/microposts' %>
+    <div class="col-md-7"> 
+      <%= render 'shared/create_micropost' %>
     </div>
-    <div class="col-md-1"> 
-      
+    <div class="col-md-2"> 
+      <ul class="nav nav-pills nav-stacked">
+        <li>
+          <%= link_to(user_posts_path(@user)) do %>
+            <B>Post</B>
+            <span class="badge pull-right">
+              <%= @user.posts.count %>
+            </span>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to(user_microposts_path(@user)) do %>
+            <b>Micropost</b>
+            <span class="badge pull-right">
+              <%= @user.microposts.count %>
+            </span>
+          <% end %>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

@@ -3,8 +3,8 @@ class MicropostsController < ApplicationController
   # GET /microposts
   # GET /microposts.json
   def index
-    @microposts = Micropost.paginate(page: params[:page],per_page: 10)
-
+    @user = User.find(params[:user_id])
+    @microposts = Micropost.where(user_id: params[:user_id]).paginate(page: params[:page],per_page: 6)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @microposts }
@@ -77,9 +77,9 @@ class MicropostsController < ApplicationController
   def destroy
     @micropost = Micropost.find(params[:id])
     @micropost.destroy
-
+    flash[:success] = "Destroyed successfully!"
     respond_to do |format|
-      format.html { redirect_to microposts_url }
+      format.html { redirect_to user_microposts_url }
       format.json { head :no_content }
     end
   end

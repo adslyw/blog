@@ -5,8 +5,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-     @users = User.paginate(page: params[:page],per_page: 10)
-
+    @users = User.paginate(page: params[:page],per_page: 10)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }
@@ -16,8 +15,9 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
+    @user = current_user
     @microposts = @user.microposts.paginate(page: params[:page],per_page: 7)
+    @micropost = @user.microposts.build
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }

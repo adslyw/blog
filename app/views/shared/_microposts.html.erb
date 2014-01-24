@@ -7,20 +7,18 @@
     <div class="media-body">
       <h4 class="media-heading">
         <b><%=link_to micropost.user.name,user_path(micropost.user) %>  </b>
-        <small>  Posted at:<%= time_ago_in_words(micropost.created_at) %> ago</small>
+        <small>  Posted <%= time_ago_in_words(micropost.created_at) %> ago</small>
       </h4>
       <h5>
       <%= micropost.content %><br />
       <div class="pull-right">
         <% if current_user.admin? || current_user?(micropost.user) %>        
-          <%= link_to(micropost,method: :delete,data: { confirm: "Are you sure?"}) do %>
+          <%= link_to(user_micropost_path(micropost.user,micropost),method: :delete,data: { confirm: "Are you sure?"}) do %>
             <span class="glyphicon glyphicon-trash"> </span> 
           <% end %>               
         <% end %>
       </div>      
-      </h5>
-              
+      </h5>              
     </div>
   </div>
 <% end %>
-<br />

@@ -2,10 +2,12 @@ Blog::Application.routes.draw do
 
   resources :microposts
   resources :sessions, only: [:new, :create, :destroy]
-  resources :posts
   resources :users do
-    resources :microposts,:posts
+    resources :posts, only: [:index, :destroy]
+    resources :microposts, only: [:index, :destroy]
   end
+  resources :posts
+
   
   match '/', to: 'sp#index'
   match '/signup', to: "users#new", via: 'get'
@@ -14,12 +16,6 @@ Blog::Application.routes.draw do
   match '/help', to: "sp#help"
   match '/contactus', to: "sp#contactus"
   match '/about', to: "sp#about"
-
-  resources :posts do
-    resources :comments
-  end
-  
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

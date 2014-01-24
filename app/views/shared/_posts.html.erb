@@ -7,15 +7,17 @@
     <div class="media-body">
       <h4 class="media-heading">
         <b><%=link_to post.user.name,user_path(post.user) %>  </b>
-        <small>  Posted at:<%= time_ago_in_words(post.created_at) %> ago</small>
+        <small>  Posted <%= time_ago_in_words(post.created_at) %> ago</small>
       </h4>
       <h5>
-      <%= post.body %><br />
+      <%= post.body %>
       <div class="pull-right">
-        <% if current_user.admin? || current_user?(post.user) %>
-         <%= link_to "Delete", post,method: :delete,class: "btn btn-danger btn-xs" ,data: { confirm: "Are you sure?"} %>
+        <% if current_user.admin? || current_user?(post.user) %>        
+          <%= link_to(user_post_path(post.user,post),method: :delete,data: { confirm: "Are you sure?"}) do %>
+            <span class="glyphicon glyphicon-trash"> </span> 
+          <% end %>               
         <% end %>
-      </div>      
+      </div>        
       </h5>
               
     </div>
