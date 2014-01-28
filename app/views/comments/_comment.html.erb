@@ -1,18 +1,18 @@
-<% @post.comments.each do |comment| %>
-  <p>
-    <b>Commenter:</b>
-    <%= comment.commenter %>
-  </p>
- 
-  <p>
-    <b>Comment:</b>
-    <%= comment.body %>
-  </p>
-
-<p>
-  <%= link_to 'Destroy Comment', [comment.post, comment],
-               :confirm => 'Are you sure?',
-               :method => :delete %>
-</p>
-
-<% end %>
+<li class="media">
+  <a class="pull-left" href="#">
+    <%= gravatar_for comment.user, size: 64, class: "img-circle media-object" %>
+  </a>   
+  <div class="media-body">
+    <h4 class="media-heading"><b><%= link_to comment.user.name,user_path(comment.user) %></b></h4>
+    <h5>
+      <%= comment.body %>
+      <div class="pull-right">
+        <% if current_user.admin? || current_user?(comment.user) %>        
+            <%= link_to([comment.post, comment], :confirm => 'Are you sure?', :method => :delete) do %>
+                <span class="glyphicon glyphicon-trash"> </span> 
+            <% end %>               
+        <% end %>
+      </div>
+    </h5>
+  </div>
+</li>

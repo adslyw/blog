@@ -15,13 +15,21 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = current_user
+    @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page],per_page: 7)
     @micropost = @user.microposts.build
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @user }
-    end
+
+    if current_user?(@user)
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @user }
+      end
+    else
+        respond_to do |format|
+          format.html { redirect_to user_posts_url(@user)}
+        end         
+    end  
+
   end
 
   # GET /users/new

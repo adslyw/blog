@@ -20,7 +20,7 @@ class PostsController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    @posts = Post.where(user_id: params[:user_id]).paginate(page: params[:page],per_page: 5)
+    @posts = Post.where(user_id: params[:user_id]).paginate(page: params[:page],per_page: 4)
   	respond_to do |format|
   		format.html
   		format.json { render json: @posts}

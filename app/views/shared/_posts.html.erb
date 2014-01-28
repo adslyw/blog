@@ -1,16 +1,18 @@
 <%= will_paginate @posts, class: "apple_pagination" %>
 <% @posts.each do |post| %>
-  <div class="media">
-    <a class="pull-left" href="#">
-      <%= gravatar_for post.user, size: 64, class: "img-rounded" %>
-    </a>
-    <div class="media-body">
-      <h4 class="media-heading">
-        <b><%=link_to post.user.name,user_path(post.user) %>  </b>
-        <small>  Posted <%= time_ago_in_words(post.created_at) %> ago</small>
-      </h4>
-      <h5>
-      <%= post.body %>
+      <div class="page-header">
+        <h2>
+        <b><%=link_to post.title,post_path(post) %></b>        
+        <div class="pull-right">
+        <h3>
+        <small>Posted <%= time_ago_in_words(post.created_at) %> ago</small>
+        </h3>
+        </div>
+        </h2>
+      </div>
+      <p>
+        <%= post.body %>
+      </p>
       <div class="pull-right">
         <% if current_user.admin? || current_user?(post.user) %>        
           <%= link_to(user_post_path(post.user,post),method: :delete,data: { confirm: "Are you sure?"}) do %>
@@ -18,9 +20,4 @@
           <% end %>               
         <% end %>
       </div>        
-      </h5>
-              
-    </div>
-  </div>
 <% end %>
-<br />

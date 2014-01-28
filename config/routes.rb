@@ -6,7 +6,10 @@ Blog::Application.routes.draw do
     resources :posts, only: [:index, :destroy]
     resources :microposts, only: [:index, :destroy]
   end
-  resources :posts
+  resources :posts do
+    resources :comments
+  end
+
 
   
   match '/', to: 'sp#index'

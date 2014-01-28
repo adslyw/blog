@@ -3,14 +3,16 @@
 # Table name: comments
 #
 #  id         :integer          not null, primary key
-#  commenter  :string(255)
 #  body       :text
 #  post_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_id    :integer
 #
 
 class Comment < ActiveRecord::Base
   belongs_to :post
-  attr_accessible :body, :commenter
+  belongs_to :user
+  attr_accessible :body, :post_id, :user_id
+  validates :body,presence: true
 end
